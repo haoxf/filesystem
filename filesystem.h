@@ -1277,9 +1277,9 @@ inline std::string systemErrorText(ErrorNumber code = 0)
     LocalFree(msgBuf);
     return msg;
 #elif defined(GHC_OS_LINUX)
-    char buffer[512];
-    char* msg = strerror_r(code ? code : errno, buffer, sizeof(buffer));
-    return msg ? msg : buffer;
+    char buffer[512] = "";
+    /*char* msg = */strerror_r(code ? code : errno, buffer, sizeof(buffer));
+    return /*msg ? msg : */buffer;
 #elif defined(GHC_OS_MACOS)
     char buffer[512];
     int rc = strerror_r(code ? code : errno, buffer, sizeof(buffer));
@@ -1679,9 +1679,9 @@ inline u8arguments::u8arguments(int& argc, char**& argv)
     _isvalid = true;
 #else
     std::setlocale(LC_ALL, "");
-    if (!detail::compare_no_case(::nl_langinfo(CODESET), "UTF-8")) {
+    // if (!detail::compare_no_case(::nl_langinfo(CODESET), "UTF-8")) {
         _isvalid = true;
-    }
+    // }
 #endif
 }
 
