@@ -3778,6 +3778,7 @@ inline void resize_file(const path& p, uintmax_t size, std::error_code& ec) noex
 #endif
 }
 
+#if !defined(__ANDROID_API__) || __ANDROID_API__ >= 19
 inline space_info space(const path& p)
 {
     std::error_code ec;
@@ -3809,6 +3810,7 @@ inline space_info space(const path& p, std::error_code& ec) noexcept
     return {static_cast<uintmax_t>(sfs.f_blocks * sfs.f_frsize), static_cast<uintmax_t>(sfs.f_bfree * sfs.f_frsize), static_cast<uintmax_t>(sfs.f_bavail * sfs.f_frsize)};
 #endif
 }
+#endif // !defined(__ANDROID_API__) || __ANDROID_API__ >= 19
 
 inline file_status status(const path& p)
 {
