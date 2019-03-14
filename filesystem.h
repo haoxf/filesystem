@@ -2018,7 +2018,7 @@ inline std::u32string path::u32string() const
 template <class EcharT, class traits, class Allocator>
 std::basic_string<EcharT, traits, Allocator> path::generic_string(const Allocator& a) const
 {
-    detail::fromUtf8<std::basic_string<EcharT, traits, Allocator>>(_path, a);
+    return detail::fromUtf8<std::basic_string<EcharT, traits, Allocator>>(_path, a);
 }
 
 inline const std::string& path::generic_string() const
